@@ -15,7 +15,7 @@
     "commands": [
       {
         "command": "deepseek.askDeepSeek",
-        "title": "Hello World"
+        "title": "Ask DeepSeek AI"
       }
     ]
   },

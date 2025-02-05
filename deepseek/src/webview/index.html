@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="{{styleUri}}" />
+    <title>DeepSeek AI</title>
+  </head>
+  <body>
+    <div class="container">
+      <h2>DeepSeek AI Chat</h2>
+      <div class="input-container">
+        <input
+          id="inputBox"
+          type="text"
+          placeholder="Enter your prompt"
+          onkeypress="handleKeyPress(event)"
+        />
+        <button onclick="sendMessage()">Ask</button>
+      </div>
+      <div id="spinner"></div>
+      <div id="response" style="display: none"></div>
+      <div id="error" class="error" style="display: none"></div>
+      <button class="clear-button" onclick="clearInput()">Clear</button>
+    </div>
+
+    <script src="{{scriptUri}}"></script>
+  </body>
+</html>

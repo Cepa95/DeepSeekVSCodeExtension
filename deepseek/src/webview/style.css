@@ -1,0 +1,76 @@
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f4f4f4;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.container {
+  background: white;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 500px;
+  text-align: center;
+}
+h2 {
+  margin-bottom: 15px;
+  color: #333;
+}
+.input-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+input {
+  flex: 1;
+  padding: 12px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 16px;
+  outline: none;
+}
+button {
+  background: #007acc;
+  color: white;
+  border: none;
+  padding: 12px 18px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+button:hover {
+  background: #005fa3;
+}
+#response {
+  margin-top: 20px;
+  background: #e6f7ff;
+  padding: 15px;
+  border-radius: 8px;
+  text-align: left;
+  white-space: pre-wrap;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+}
+#spinner {
+  margin-top: 20px;
+  display: none;
+  animation: rotate 1s infinite linear;
+}
+#spinner::after {
+  content: "💬";
+}
+.error {
+  color: red;
+  margin-top: 20px;
+}
+.clear-button {
+  background: #ff4d4d;
+  margin-top: 10px;
+  border-radius: 8px;
+  cursor: pointer;
+  color: white;
+  padding: 10px 20px;
+}
