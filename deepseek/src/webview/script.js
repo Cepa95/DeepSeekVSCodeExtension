@@ -24,6 +24,7 @@ function sendMessage() {
 
 function clearInput() {
   document.getElementById("inputBox").value = "";
+  document.getElementById("response").textContent = "";
   document.getElementById("response").style.display = "none";
   document.getElementById("spinner").style.display = "none";
   document.getElementById("error").style.display = "none";
@@ -37,3 +38,12 @@ window.addEventListener("message", (event) => {
     document.getElementById("response").style.display = "block";
   }
 });
+
+document
+  .getElementById("saveResponseButton")
+  .addEventListener("click", function () {
+    const responseText = document.getElementById("response").textContent;
+    if (responseText) {
+      vscode.postMessage({ command: "saveResponse", text: responseText });
+    }
+  });
