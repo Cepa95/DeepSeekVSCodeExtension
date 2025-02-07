@@ -1,6 +1,6 @@
 body {
-  font-family: Arial, sans-serif;
-  background-color: #f4f4f4;
+  font-family: "Roboto", sans-serif;
+  background: #c3cfe2;
   padding: 20px;
   display: flex;
   flex-direction: column;
@@ -25,7 +25,8 @@ h2 {
   align-items: center;
   gap: 10px;
 }
-input {
+textarea {
+  font-family: "Roboto", sans-serif;
   flex: 1;
   padding: 12px;
   border: 1px solid #ddd;

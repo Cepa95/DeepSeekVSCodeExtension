@@ -10,12 +10,13 @@
     <div class="container">
       <h2>DeepSeek AI Chat</h2>
       <div class="input-container">
-        <input
+        <textarea
           id="inputBox"
-          type="text"
           placeholder="Enter your prompt"
           onkeypress="handleKeyPress(event)"
-        />
+          rows="4"
+          cols="200"
+        ></textarea>
         <button onclick="sendMessage()">Ask</button>
       </div>
       <div id="spinner"></div>

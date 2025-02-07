@@ -1,21 +1,45 @@
 import * as vscode from "vscode";
 import axios from "axios";
 import { getWebviewContent } from "./webviewContent";
-import { writeFile } from "fs/promises";
-import { join } from "path";
 
-async function queryDeepSeek(input: string): Promise<string> {
+async function queryDeepSeek(input: string, panel: vscode.WebviewPanel) {
   try {
-    const response = await axios.post("http://localhost:11434/api/generate", {
-      model: "deepseek-r1:1.5b",
-      prompt: input,
-      stream: false,
+    const response = await axios.post(
+      "http://localhost:11434/api/generate",
+      {
+        model: "deepseek-r1:1.5b",
+        prompt: input,
+        stream: true,
+      },
+      { responseType: "stream" }
+    );
+
+    let accumulatedResponse = "";
+
+    response.data.on("data", (chunk: Buffer) => {
+      const textChunk = chunk.toString();
+      try {
+        const parsedChunk = JSON.parse(textChunk);
+        accumulatedResponse += parsedChunk.response;
+        panel.webview.postMessage({
+          command: "responseChunk",
+          text: parsedChunk.response,
+        });
+      } catch (error) {
+        console.error("Error parsing response chunk:", error);
+      }
     });
 
-    return response.data.response;
+    response.data.on("end", () => {
+      panel.webview.postMessage({
+        command: "responseComplete",
+        text: accumulatedResponse,
+      });
+    });
+
+    console.log("Done streaming response.");
   } catch (error) {
     console.error("Error querying DeepSeek:", error);
-    return "Error fetching response from DeepSeek.";
   }
 }
 
@@ -71,7 +95,7 @@ export function activate(context: vscode.ExtensionContext) {
 
       panel.webview.onDidReceiveMessage(async (message) => {
         if (message.command === "ask") {
-          const response = await queryDeepSeek(message.text);
+          const response = await queryDeepSeek(message.text, panel);
           panel.webview.postMessage({ command: "response", text: response });
         } else if (message.command === "saveResponse") {
           const responseText = message.text;

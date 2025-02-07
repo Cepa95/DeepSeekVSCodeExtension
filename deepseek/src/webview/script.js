@@ -32,7 +32,11 @@ function clearInput() {
 
 window.addEventListener("message", (event) => {
   const message = event.data;
-  if (message.command === "response") {
+  if (message.command === "responseChunk") {
+    document.getElementById("response").textContent += message.text;
+    document.getElementById("spinner").style.display = "none";
+    document.getElementById("response").style.display = "block";
+  } else if (message.command === "responseComplete") {
     document.getElementById("response").textContent = message.text;
     document.getElementById("spinner").style.display = "none";
     document.getElementById("response").style.display = "block";
